@@ -93,6 +93,7 @@ jobs:
       id: package
       run: |
         cd openwrt
+        make clean
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
@@ -101,8 +102,8 @@ jobs:
     - name: Compile the firmware
       id: compile
       run: |
-        export GO111MODULE = on
-        export GOPROXY = https://goproxy.xn
+        export GO111MODULE=on
+        export GOPROXY=https://goproxy.cn
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
